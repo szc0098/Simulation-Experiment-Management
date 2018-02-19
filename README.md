@@ -29,4 +29,4 @@ Run the ServerLauncher.java in the package org.xtext.example.mydsl.web.
 
 This will launch the server and you can look at the web interface at localhost
 
-For details please look into :
+For details please look into : https://github.com/szc0098/Simulation-Experiment-Management/blob/master/SImulation%20Experiment%20Management.pdf
