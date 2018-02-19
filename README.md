@@ -14,7 +14,7 @@ The results of the  model checking are incorporated into Bayesian networks which
 The Goal-Hypothesis-Experiment framework: A generative cognitive domain architecture for simulation experiment management.
 
 
-#Dependencies:
+# Dependencies:
 
 XText
 
