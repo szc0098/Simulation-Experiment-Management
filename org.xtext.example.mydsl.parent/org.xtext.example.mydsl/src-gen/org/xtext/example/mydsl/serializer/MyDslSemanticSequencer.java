@@ -14,9 +14,37 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import org.xtext.example.mydsl.myDsl.Greeting;
+import org.xtext.example.mydsl.myDsl.CoherenceLink;
+import org.xtext.example.mydsl.myDsl.Condition;
+import org.xtext.example.mydsl.myDsl.ControlVariables;
+import org.xtext.example.mydsl.myDsl.DependentVariables;
+import org.xtext.example.mydsl.myDsl.Design;
+import org.xtext.example.mydsl.myDsl.Dispersed;
+import org.xtext.example.mydsl.myDsl.EventDescriptor;
+import org.xtext.example.mydsl.myDsl.Evidence;
+import org.xtext.example.mydsl.myDsl.Experiment;
+import org.xtext.example.mydsl.myDsl.Factor;
+import org.xtext.example.mydsl.myDsl.FactorLevels;
+import org.xtext.example.mydsl.myDsl.Goals;
+import org.xtext.example.mydsl.myDsl.GuardCondition;
+import org.xtext.example.mydsl.myDsl.Hypothesis;
+import org.xtext.example.mydsl.myDsl.IndependentVariables;
+import org.xtext.example.mydsl.myDsl.Iteration;
+import org.xtext.example.mydsl.myDsl.MechHypothesis;
+import org.xtext.example.mydsl.myDsl.Mechanism;
 import org.xtext.example.mydsl.myDsl.Model;
+import org.xtext.example.mydsl.myDsl.ModelSection;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.PerformanceMeasure;
+import org.xtext.example.mydsl.myDsl.Query1;
+import org.xtext.example.mydsl.myDsl.Query2;
+import org.xtext.example.mydsl.myDsl.Query3;
+import org.xtext.example.mydsl.myDsl.Reaction;
+import org.xtext.example.mydsl.myDsl.Response;
+import org.xtext.example.mydsl.myDsl.Simultaneous;
+import org.xtext.example.mydsl.myDsl.Values;
+import org.xtext.example.mydsl.myDsl.Variables;
+import org.xtext.example.mydsl.myDsl.properties;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -33,11 +61,102 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == MyDslPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case MyDslPackage.GREETING:
-				sequence_Greeting(context, (Greeting) semanticObject); 
+			case MyDslPackage.COHERENCE_LINK:
+				sequence_CoherenceLink(context, (CoherenceLink) semanticObject); 
+				return; 
+			case MyDslPackage.CONDITION:
+				if (rule == grammarAccess.getConditionRule()) {
+					sequence_Condition(context, (Condition) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getTemporalPatternRule()) {
+					sequence_Condition_TemporalPattern(context, (Condition) semanticObject); 
+					return; 
+				}
+				else break;
+			case MyDslPackage.CONTROL_VARIABLES:
+				sequence_ControlVariables(context, (ControlVariables) semanticObject); 
+				return; 
+			case MyDslPackage.DEPENDENT_VARIABLES:
+				sequence_DependentVariables(context, (DependentVariables) semanticObject); 
+				return; 
+			case MyDslPackage.DESIGN:
+				sequence_Design(context, (Design) semanticObject); 
+				return; 
+			case MyDslPackage.DISPERSED:
+				sequence_Dispersed(context, (Dispersed) semanticObject); 
+				return; 
+			case MyDslPackage.EVENT_DESCRIPTOR:
+				sequence_EventDescriptor(context, (EventDescriptor) semanticObject); 
+				return; 
+			case MyDslPackage.EVIDENCE:
+				sequence_Evidence(context, (Evidence) semanticObject); 
+				return; 
+			case MyDslPackage.EXPERIMENT:
+				sequence_Experiment(context, (Experiment) semanticObject); 
+				return; 
+			case MyDslPackage.FACTOR:
+				sequence_Factor(context, (Factor) semanticObject); 
+				return; 
+			case MyDslPackage.FACTOR_LEVELS:
+				sequence_FactorLevels(context, (FactorLevels) semanticObject); 
+				return; 
+			case MyDslPackage.GOALS:
+				sequence_Goals(context, (Goals) semanticObject); 
+				return; 
+			case MyDslPackage.GUARD_CONDITION:
+				sequence_GuardCondition(context, (GuardCondition) semanticObject); 
+				return; 
+			case MyDslPackage.HYPOTHESIS:
+				sequence_Hypothesis(context, (Hypothesis) semanticObject); 
+				return; 
+			case MyDslPackage.INDEPENDENT_VARIABLES:
+				sequence_IndependentVariables(context, (IndependentVariables) semanticObject); 
+				return; 
+			case MyDslPackage.ITERATION:
+				sequence_Iteration(context, (Iteration) semanticObject); 
+				return; 
+			case MyDslPackage.MECH_HYPOTHESIS:
+				sequence_MechHypothesis(context, (MechHypothesis) semanticObject); 
+				return; 
+			case MyDslPackage.MECHANISM:
+				sequence_Mechanism(context, (Mechanism) semanticObject); 
 				return; 
 			case MyDslPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
+				return; 
+			case MyDslPackage.MODEL_SECTION:
+				sequence_ModelSection(context, (ModelSection) semanticObject); 
+				return; 
+			case MyDslPackage.PERFORMANCE_MEASURE:
+				sequence_PerformanceMeasure(context, (PerformanceMeasure) semanticObject); 
+				return; 
+			case MyDslPackage.QUERY1:
+				sequence_Query1(context, (Query1) semanticObject); 
+				return; 
+			case MyDslPackage.QUERY2:
+				sequence_Query2(context, (Query2) semanticObject); 
+				return; 
+			case MyDslPackage.QUERY3:
+				sequence_Query3(context, (Query3) semanticObject); 
+				return; 
+			case MyDslPackage.REACTION:
+				sequence_Reaction(context, (Reaction) semanticObject); 
+				return; 
+			case MyDslPackage.RESPONSE:
+				sequence_Response(context, (Response) semanticObject); 
+				return; 
+			case MyDslPackage.SIMULTANEOUS:
+				sequence_Simultaneous(context, (Simultaneous) semanticObject); 
+				return; 
+			case MyDslPackage.VALUES:
+				sequence_Values(context, (Values) semanticObject); 
+				return; 
+			case MyDslPackage.VARIABLES:
+				sequence_Variables(context, (Variables) semanticObject); 
+				return; 
+			case MyDslPackage.PROPERTIES:
+				sequence_properties(context, (properties) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -46,19 +165,301 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     Greeting returns Greeting
+	 *     CoherenceLink returns CoherenceLink
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     (coherence=Coherence hyp+=ID* evi+=ID*)
 	 */
-	protected void sequence_Greeting(ISerializationContext context, Greeting semanticObject) {
+	protected void sequence_CoherenceLink(ISerializationContext context, CoherenceLink semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Condition returns Condition
+	 *
+	 * Constraint:
+	 *     (condition=Event lo=LinkOperators? e=Event? exp1=Expression? v=rangeValue?)
+	 */
+	protected void sequence_Condition(ISerializationContext context, Condition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TemporalPattern returns Condition
+	 *
+	 * Constraint:
+	 *     (
+	 *         condition=Event 
+	 *         lo=LinkOperators? 
+	 *         e=Event? 
+	 *         exp1=Expression? 
+	 *         v=rangeValue? 
+	 *         l2+=Links* 
+	 *         exp+=Expression* 
+	 *         (op1+=Temporal | op2+=Logical)* 
+	 *         l3=Links?
+	 *     )
+	 */
+	protected void sequence_Condition_TemporalPattern(ISerializationContext context, Condition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ControlVariables returns ControlVariables
+	 *
+	 * Constraint:
+	 *     (controlName=ID controlType=VariableType controlValue=Values)+
+	 */
+	protected void sequence_ControlVariables(ISerializationContext context, ControlVariables semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     DependentVariables returns DependentVariables
+	 *
+	 * Constraint:
+	 *     responseName=Response+
+	 */
+	protected void sequence_DependentVariables(ISerializationContext context, DependentVariables semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Design returns Design
+	 *
+	 * Constraint:
+	 *     (designType=DesignType? constraint=ID* iteration=Iteration? variables=Variables)
+	 */
+	protected void sequence_Design(ISerializationContext context, Design semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Event returns Dispersed
+	 *     Dispersed returns Dispersed
+	 *
+	 * Constraint:
+	 *     disp+=Re+
+	 */
+	protected void sequence_Dispersed(ISerializationContext context, Dispersed semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EventDescriptor returns EventDescriptor
+	 *
+	 * Constraint:
+	 *     (eventName=ID event=STRING)
+	 */
+	protected void sequence_EventDescriptor(ISerializationContext context, EventDescriptor semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.GREETING__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.GREETING__NAME));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.EVENT_DESCRIPTOR__EVENT_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.EVENT_DESCRIPTOR__EVENT_NAME));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.EVENT_DESCRIPTOR__EVENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.EVENT_DESCRIPTOR__EVENT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEventDescriptorAccess().getEventNameIDTerminalRuleCall_1_0(), semanticObject.getEventName());
+		feeder.accept(grammarAccess.getEventDescriptorAccess().getEventSTRINGTerminalRuleCall_3_0(), semanticObject.getEvent());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Evidence returns Evidence
+	 *
+	 * Constraint:
+	 *     (eName=ID query+=TemporalPattern* objOfStudy=rangeValue)
+	 */
+	protected void sequence_Evidence(ISerializationContext context, Evidence semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ExperimentOntology returns Experiment
+	 *     Experiment returns Experiment
+	 *
+	 * Constraint:
+	 *     (expName=ID expDesign=Design perfMeasure=PerformanceMeasure)
+	 */
+	protected void sequence_Experiment(ISerializationContext context, Experiment semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.EXPERIMENT__EXP_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.EXPERIMENT__EXP_NAME));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.EXPERIMENT__EXP_DESIGN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.EXPERIMENT__EXP_DESIGN));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.EXPERIMENT__PERF_MEASURE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.EXPERIMENT__PERF_MEASURE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExperimentAccess().getExpNameIDTerminalRuleCall_1_0(), semanticObject.getExpName());
+		feeder.accept(grammarAccess.getExperimentAccess().getExpDesignDesignParserRuleCall_4_0(), semanticObject.getExpDesign());
+		feeder.accept(grammarAccess.getExperimentAccess().getPerfMeasurePerformanceMeasureParserRuleCall_7_0(), semanticObject.getPerfMeasure());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     FactorLevels returns FactorLevels
+	 *
+	 * Constraint:
+	 *     (facName=ID l=factorLevelValue? (l1=Levels l2=Levels start1=rangeValue end1=rangeValue)?)
+	 */
+	protected void sequence_FactorLevels(ISerializationContext context, FactorLevels semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Factor returns Factor
+	 *
+	 * Constraint:
+	 *     (factorName=ID factorType=VariableType? factorType1=ID? factorValue=Values? factorProperties+=properties*)
+	 */
+	protected void sequence_Factor(ISerializationContext context, Factor semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ExperimentOntology returns Goals
+	 *     Goals returns Goals
+	 *
+	 * Constraint:
+	 *     (objOfStudy=STRING purpose=STRING focus=STRING viewPoint=STRING context=STRING)
+	 */
+	protected void sequence_Goals(ISerializationContext context, Goals semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.GOALS__OBJ_OF_STUDY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.GOALS__OBJ_OF_STUDY));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.GOALS__PURPOSE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.GOALS__PURPOSE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.GOALS__FOCUS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.GOALS__FOCUS));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.GOALS__VIEW_POINT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.GOALS__VIEW_POINT));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.GOALS__CONTEXT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.GOALS__CONTEXT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGoalsAccess().getObjOfStudySTRINGTerminalRuleCall_6_0(), semanticObject.getObjOfStudy());
+		feeder.accept(grammarAccess.getGoalsAccess().getPurposeSTRINGTerminalRuleCall_9_0(), semanticObject.getPurpose());
+		feeder.accept(grammarAccess.getGoalsAccess().getFocusSTRINGTerminalRuleCall_12_0(), semanticObject.getFocus());
+		feeder.accept(grammarAccess.getGoalsAccess().getViewPointSTRINGTerminalRuleCall_15_0(), semanticObject.getViewPoint());
+		feeder.accept(grammarAccess.getGoalsAccess().getContextSTRINGTerminalRuleCall_18_0(), semanticObject.getContext());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     GuardCondition returns GuardCondition
+	 *
+	 * Constraint:
+	 *     (gd='[' condition1=ID? link=LinkOperators? condition2=ID?)
+	 */
+	protected void sequence_GuardCondition(ISerializationContext context, GuardCondition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ExperimentOntology returns Hypothesis
+	 *     Hypothesis returns Hypothesis
+	 *
+	 * Constraint:
+	 *     (mechHypothesis+=MechHypothesis* evidences+=Evidence* coherenceLinks+=CoherenceLink* relHypothesis+=RelationalQuery*)
+	 */
+	protected void sequence_Hypothesis(ISerializationContext context, Hypothesis semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     IndependentVariables returns IndependentVariables
+	 *
+	 * Constraint:
+	 *     variables+=FactorLevels+
+	 */
+	protected void sequence_IndependentVariables(ISerializationContext context, IndependentVariables semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Iteration returns Iteration
+	 *
+	 * Constraint:
+	 *     iterations=INT
+	 */
+	protected void sequence_Iteration(ISerializationContext context, Iteration semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ITERATION__ITERATIONS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ITERATION__ITERATIONS));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getIterationAccess().getIterationsINTTerminalRuleCall_4_0(), semanticObject.getIterations());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     MechHypothesis returns MechHypothesis
+	 *
+	 * Constraint:
+	 *     (mName=ID assoMech+=TemporalPattern* mechanisticHypothesis=ID?)
+	 */
+	protected void sequence_MechHypothesis(ISerializationContext context, MechHypothesis semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Mechanism returns Mechanism
+	 *
+	 * Constraint:
+	 *     (mechanismName=ID LHS=Reaction condition=GuardCondition? RHS=Reaction)
+	 */
+	protected void sequence_Mechanism(ISerializationContext context, Mechanism semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ExperimentOntology returns ModelSection
+	 *     ModelSection returns ModelSection
+	 *
+	 * Constraint:
+	 *     (modName=ID mechanisms+=Mechanism* events+=EventDescriptor* parameters+=Factor*)
+	 */
+	protected void sequence_ModelSection(ISerializationContext context, ModelSection semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -67,10 +468,195 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Model returns Model
 	 *
 	 * Constraint:
-	 *     greetings+=Greeting+
+	 *     elements+=ExperimentOntology+
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PerformanceMeasure returns PerformanceMeasure
+	 *
+	 * Constraint:
+	 *     (expectedResponse=ID er=rangeValue std=rangeValue)
+	 */
+	protected void sequence_PerformanceMeasure(ISerializationContext context, PerformanceMeasure semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.PERFORMANCE_MEASURE__EXPECTED_RESPONSE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.PERFORMANCE_MEASURE__EXPECTED_RESPONSE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.PERFORMANCE_MEASURE__ER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.PERFORMANCE_MEASURE__ER));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.PERFORMANCE_MEASURE__STD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.PERFORMANCE_MEASURE__STD));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPerformanceMeasureAccess().getExpectedResponseIDTerminalRuleCall_1_0(), semanticObject.getExpectedResponse());
+		feeder.accept(grammarAccess.getPerformanceMeasureAccess().getErRangeValueTerminalRuleCall_3_0(), semanticObject.getEr());
+		feeder.accept(grammarAccess.getPerformanceMeasureAccess().getStdRangeValueTerminalRuleCall_5_0(), semanticObject.getStd());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     RelationalQuery returns Query1
+	 *     Query1 returns Query1
+	 *
+	 * Constraint:
+	 *     (
+	 *         factor=ID? 
+	 *         control=ID? 
+	 *         x=rangeValue? 
+	 *         (start1=rangeValue end1=rangeValue)? 
+	 *         response=ID 
+	 *         y=rangeValue? 
+	 *         (start2=rangeValue end2=rangeValue)?
+	 *     )
+	 */
+	protected void sequence_Query1(ISerializationContext context, Query1 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     RelationalQuery returns Query2
+	 *     Query2 returns Query2
+	 *
+	 * Constraint:
+	 *     (
+	 *         function1=Function? 
+	 *         response1=ID? 
+	 *         factor1=ID? 
+	 *         function2=Function? 
+	 *         response2=ID? 
+	 *         factor2=ID?
+	 *     )
+	 */
+	protected void sequence_Query2(ISerializationContext context, Query2 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     RelationalQuery returns Query3
+	 *     Query3 returns Query3
+	 *
+	 * Constraint:
+	 *     (
+	 *         (factor1=ID | control1=ID | Level2=Levels | x2=rangeValue)* 
+	 *         (response1=ID Level4=Levels? x4=rangeValue?)* 
+	 *         (
+	 *             level=Levels 
+	 *             factor=ID? 
+	 *             control=ID? 
+	 *             response=ID? 
+	 *             start1=rangeValue 
+	 *             end1=rangeValue
+	 *         )*
+	 *     )
+	 */
+	protected void sequence_Query3(ISerializationContext context, Query3 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Reaction returns Reaction
+	 *
+	 * Constraint:
+	 *     (agent1=ID agent=ID?)
+	 */
+	protected void sequence_Reaction(ISerializationContext context, Reaction semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Response returns Response
+	 *
+	 * Constraint:
+	 *     (responseName=ID responseType=ResponseType)
+	 */
+	protected void sequence_Response(ISerializationContext context, Response semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.RESPONSE__RESPONSE_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RESPONSE__RESPONSE_NAME));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.RESPONSE__RESPONSE_TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RESPONSE__RESPONSE_TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getResponseAccess().getResponseNameIDTerminalRuleCall_0_0(), semanticObject.getResponseName());
+		feeder.accept(grammarAccess.getResponseAccess().getResponseTypeResponseTypeEnumRuleCall_3_0(), semanticObject.getResponseType());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Event returns Simultaneous
+	 *     Simultaneous returns Simultaneous
+	 *
+	 * Constraint:
+	 *     (sim1=Re (log+=Logical sim2+=Re)*)
+	 */
+	protected void sequence_Simultaneous(ISerializationContext context, Simultaneous semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Values returns Values
+	 *
+	 * Constraint:
+	 *     (
+	 *         (fVal=ID ((function=STRING fvalue=factorLevelValue) | fvalue=factorLevelValue)) | 
+	 *         (((fVal=ID function=STRING) | function=STRING)? value=rangeValue fvalue=factorLevelValue) | 
+	 *         (function=STRING fvalue=factorLevelValue) | 
+	 *         fvalue=factorLevelValue
+	 *     )?
+	 */
+	protected void sequence_Values(ISerializationContext context, Values semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Variables returns Variables
+	 *
+	 * Constraint:
+	 *     (independentVariables=IndependentVariables controlVariables=ControlVariables? dependentVariables=DependentVariables)
+	 */
+	protected void sequence_Variables(ISerializationContext context, Variables semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     properties returns properties
+	 *
+	 * Constraint:
+	 *     (pName=ID pVal=Values)
+	 */
+	protected void sequence_properties(ISerializationContext context, properties semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.PROPERTIES__PNAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.PROPERTIES__PNAME));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.PROPERTIES__PVAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.PROPERTIES__PVAL));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPropertiesAccess().getPNameIDTerminalRuleCall_0_0(), semanticObject.getPName());
+		feeder.accept(grammarAccess.getPropertiesAccess().getPValValuesParserRuleCall_2_0(), semanticObject.getPVal());
+		feeder.finish();
 	}
 	
 	
