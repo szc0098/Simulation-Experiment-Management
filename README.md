@@ -1,5 +1,4 @@
-# Simulation-Experiment-Management
-# Framework for executing and managing simulation experiments
+# Simulation-Experiment-Management: Framework for executing and managing simulation experiments
 
 MDE-enhanced Eclipse tool chain to identify, prioritize, formulate questions, and conjecture mechanisms, define or generate experiments designed to answer questions, draw inferences, and evaluate result.
 
@@ -23,6 +22,7 @@ A web application server (we used Jetty server)
 MASON
 
 PRISM Model Checker http://www.prismmodelchecker.org/manual/InstallingPRISM/Instructions#source
+
 
 # Execution:
 Run the ServerLauncher.java in the package org.xtext.example.mydsl.web.
