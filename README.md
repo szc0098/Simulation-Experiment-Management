@@ -47,6 +47,31 @@ versatility.
 The metamodel encompasses all the major components of the GHE framework. It includes the goal of the experiment, model definition, hypothesis and an experiment. 
 ![GHE Metamodel](https://github.com/szc0098/Simulation-Experiment-Management/blob/master/13.png)
 
+# Domain Specific Language(DSL)
+The DSL for simulation experiment model development is developed using the Xtext
+DSL development environment on Eclipse Neon, by translating the experiment ontology
+metamodel.
+
+```ruby
+ExperimentOntology :
+	ModelSection |Goals | Hypothesis | Experiment
+;
+	
+ModelSection:
+	'model' (modName = ID) 
+	'{'
+	(mechanisms += Mechanism)*
+	((events += EventDescriptor)?)*
+	(parameters += Factor)*
+	'}'
+;	
+
+Mechanism:
+	'mechanism' (mechanismName = ID) ' = ' (LHS = Reaction) (condition = GuardCondition)? ' -> ' (RHS = Reaction)
+;
+
+```
+
 # Execution:
 Run the ServerLauncher.java in the package org.xtext.example.mydsl.web.
 
