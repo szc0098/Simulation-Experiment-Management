@@ -27,7 +27,25 @@ https://github.com/szc0098/Simulation-Experiment-Management
 
 - [PRISM Model Checker](http://www.prismmodelchecker.org/manual/InstallingPRISM/Instructions#source)
 
+# Development
+The principles of model-driven software development are used throughout the development
+process. We started by developing a metamodel for the language in the form of a UML
+class model in order to facilitate understanding of the domain. We used this metamodel
+as a roadmap to develop a Xtext grammar and evaluated its readability
+in a reference model. The grammatical constructs defined in the Xtext grammar were
+used to identify classes and structures for a reference implementation, where a use-case
+for the application was developed and tested. Through development of the reference
+implementation, we were able to identify sections of code that were candidates for text-
+to-model transformation. These transformations bridge the gap between reference model,
+reference implementation, and platform.
+The process was an effective tool for streamlining the development of a DSL-driven
+application. By focusing on the way the language will be used before the implementation,
+we were able to create a highly expressive language while providing support for platform
+versatility.
 
+## Metamodel
+The metamodel encompasses all the major components of the GHE framework. It includes the goal of the experiment, model definition, hypothesis and an experiment. 
+![GHE Metamodel](https://github.com/szc0098/Simulation-Experiment-Management/blob/master/13.png)
 
 # Execution:
 Run the ServerLauncher.java in the package org.xtext.example.mydsl.web.
