@@ -12,6 +12,12 @@ The results of the  model checking are incorporated into Bayesian networks which
 
 The Goal-Hypothesis-Experiment framework: A generative cognitive domain architecture for simulation experiment management.
 
+# Download
+Please refer to the Simulation Experiment Management project page to download the latest release:
+
+```
+https://github.com/szc0098/Simulation-Experiment-Management
+```
 
 # Dependencies:
 
