@@ -218,6 +218,63 @@ and save the file changes.
 Xtext will trigger the generator. Youll notice a new folder appearing in your project:
 **src-gen**. Thats where the generator puts its generated artifacts.
 
--To run the web editor, run the ServerLauncher.java in the web folder.This will launch the server and you can look at the web editor at localhost.
+- To run the web editor, run the ServerLauncher.java in the web folder.This will launch the server and you can look at the web editor at localhost.
 
-For details please look into : [Simulation Experiment Management](https://github.com/szc0098/Simulation-Experiment-Management/blob/master/SImulation%20Experiment%20Management.pdf)
+# Future Efforts
+ - **Coherence/Model Discovery:**
+There is a great synergy to be taken advantage of between mechanistic hypotheses
+and temporal properties. We can take observations made from in vitro or in vivo labs
+as evidences to our simulation model in the form of temporal specifications. We can
+use these evidences in a coherence model with mechanism changes in the program,
+specified by a mechanistic hypothesis to see if an evidence is invalidated with the
+mechanism change or supports one or more evidence. One use of this coherence
+model is to develop an intelligent agent that can take knowledge gleaned from the
+model and develop new mechanism changes that support the most evidences, in
+an effort to develop autonomous computing. Alternatively, or in the short term,
+this coherence model will be useful for model discovery for a simulationist. If,
+for example, a simulationist introduces a new evidence to the system which is not
+supported by the current mechanisms, connections in the coherence model can help
+direct the user to a needed mechanism update that would not otherwise be known.
+- **Mechanistic Hypotheses:**
+Our future efforts will be directed towards generalizing this rule based definition
+of the hypotheses to capture various behavior of the model. Also our efforts will
+be directed towards identifying reaction scenarios for mechanistic hypotheses and
+associating the rules to a particular transformation process to facilitate computation.
+Transformation of these mechanism into computational code for simulation is a
+task in progress. Generalizing the transformation process to accommodate various
+scenarios is also a future goal.The challenge lies in identifying different scenarios of mechanistic hypotheses and
+generalizing the DSL to allow their definition. The transformation of these hypotheses to mechanisms or expected behavior in the simulation model for the purpose of
+computation, is a challenge. These transformations might require additional information or assumptions on the model that must be provided by the user and that is
+not defined.
+- **Point of Failure Identification:**
+In the current system, when a temporal property is violated, the model checker
+returns with a counterexample and a sequence of transitions that lead to that counterexample. With additional work, this system could trace its steps even further and
+report the mechanism that caused the hypothesis to be invalidated. This would be a
+useful tool when attempting to refine the model if wet-lab results are contradicting
+with in-silico experiment results.
+- **Automated Model Evolution:**
+In relation to the prior topic, if the mechanism that is in error is able to be identified,
+it may be able to be corrected autonomously by making minor alterations to the
+simulation source code. This goal would require a more elaborate characterization
+of mechanisms so that they could be analyzed and revised based on irregularities
+with the expected properties.
+- **Bayesian/Coherence Synergy:**
+A Bayesian network is a probabilistic graphical model that represents a set of random variables and their conditional dependencies via a directed acyclic graph. Each
+node in the graph represents a random variable, each of which has a set of possible states it can be in (or values it can take). In addition, attached to each node
+is a probability distribution. The arcs indicate a dependency between two nodes.
+If there is a dependency, then the probability distribution of the child node is a
+conditional probability that depends on the probability of the parent node. While
+the coherence network can function as a long-term memory repository of hypotheses and their relationships, Bayesian networks can be used as a short-term memory
+interface with the experiments performed. Bayesian networks can perform a variety of tasks, but here we will only discuss potential applications that demonstrate
+their use as interfaces between coherence networks and experiments. An important
+component of coherence networks are the evidence nodes. Evidence nodes, in an
+experimental context, represent observations obtained from an experiment. Often,
+these evidence nodes are determined by the experimenter as the result of interpreting the experimental data. We propose using a Bayesian network to infer these
+statements from the data.
+- **Coherence Network Analyst Agent:**
+As part of a longer-term project, we envision an intelligent agent designed to analyze the dependencies of the coherence network and propose new experiments to
+maximize in- formation gain. This agent would be able to perform optimizations
+between the experiment and hypothesis space in order to predict the most valuable parametrization of experiments and hypotheses that would lead to faster discovery.
+
+
+For more details, please look into : [Simulation Experiment Management](https://github.com/szc0098/Simulation-Experiment-Management/blob/master/SImulation%20Experiment%20Management.pdf)
