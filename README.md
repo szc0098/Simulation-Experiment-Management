@@ -71,7 +71,117 @@ Mechanism:
 ;
 
 ```
+# Reference Model
+In order to test the validity of our framework and the practical utility of the approach,
+we used our project to demonstrate the ISHC model. The DSL we developed is abstract
+and free of any technical terms. The DSL covers all relevant concepts of the domain
+with language elements. All schematically-implementable code fragments of the reference
+implementation are covered by constructs of the DSL. The reference ISHC model is an
+instance of the DSL. The DSL for simulation experiment model is developed by mapping
+the experiment ontology metamodel.
+- **Model:**
+Model consists of a specification about the models name, the mechanisms, the events and
+the factor parameters. Mechanisms consist of the processes which is assumed to take place
+in the simulation system. Events define the path for tracing the functions that evaluate
+the events that form a part of the evidences. Parameters are the inputs to the model
+and their properties, which have an impact in determining the response/output of the
+simulation run.
+```ruby
+model ISHC{
+    mechanism M1 = inflammatoryAgent + Kupffercells 
+                [inflammatoryAgent > inflammatorythreshold] -> Cytokines
+    mechanism M2 = inflammatoryAgent + Kupffercells 
+                [noOfCytokine > cytokineThreshold] -> Cytokines
+    event inflammation = 'void ishc.model.KupfferCell.handleInflammation()'
+    parameter LPS = Solute with properties {tag: LPS, bindable: true ,
+                    bolusRatio:1.0 , pExitMedia: 0.1 , pExitCell: 1.0 , 
+                     inflammatory : true , pDegrade : 0.0
+                    }
+     parameter drRate = DISCRETE with values {30}
+    }
+```
+- **Goal:**
+Goals define what the purpose of the experiment is. It also gives an idea about the specific
+field of concern and the context under which the study is performed.
+```ruby
+    goal
+    {
+    object of study : 'Immune system influence on hepatic cytochrome P450
+                        regulation'
+    purpose : 'Explain / characterize'
+    focus : 'the reason for changes in downstream drug metabolism and
+                hepatotoxicity'
+    view point : 'based on the response of hepatic cytochrome P450-
+                regulating mechanisms'
+    context : 'when health and/or therapeutic interventions change.'
+    }
+```
+- **Hypotheses:**
+Hypotheses consists of relational hypotheses, mechanistic hypotheses and expected regularities. Mechanistic hypotheses deal with the effect of changes in the mechanism of the
+model. Relational hypotheses deal with the impact of changes in inputs or outputs. In
+order to represent behavioral changes in the model, we focus on mechanistic hypotheses
+for the study. Expected regularities are the temporal properties that are to be verified in
+the experimental run. It is stated in terms of state of factors and their properties.
+The coherence model describes the explanatory coherence relation between the hypothesis and the evidence. The evidence can have an activation weight
+which indicates its reliability. This is used to establish the weightage of the link between
+the evidence and hypothesis in the coherence network. 
+```ruby
+ hypotheses
+    {
+    mechanistic hypotheses
+    {
+        H1 : M1 occurs before M2
+    }
+    evidence
+    {
+        E1: inflammation occurs after inflammatoryAgent >
+            inflammatoryAgentThreshold
+        activation weight : 0.5
+    }
+    coherence model
+     {
+        EXPLAIN (H1)(E1)
+        DATA (Experiment1)(E1 E2)
+    }
+    }
+```
+- **Experiment:**
+The ontology for the experiment section encompasses the structural elements of an experiment which includes the experiments design and performance measure. Based on the models parameters and their levels, the hypotheses and goal of the experiment, a design
+is created that is used in subsequent steps of the experiment life-cycle.
+The experimental design is defined by the dependent variables, the control variables,
+the independent variables and their levels, constraints and values which in turn are mappings of the variables provided by the user. Based on this design, one can define what
+is known as a design matrix, which specifies the actual experimental runs, that is, the
+combination of factor levels.
+```ruby
+   experiment Exp1{
+        design {
+            variables{
+                independent variables
+                    {
+                    LPS are at levels : LOW where LOW is in the range 1.0 to
+                                        1.0
+                    }
+                dependent variables
+                    {
+                    cytokines : type SIMPLE
+                    }
+                }
+            }
+```
+- **Performance Measure:**
+An experiment consists of performance measure parameters which defines the criteria for
+successful experimental run. Basing on this measure we can decide whether additional
+iterations are required for satisfying the experiments objective. It is defined in terms of
+the expected value of the response or output of the experiment and its standard deviation.
+```ruby
+performance measure is
+            {
 
+                cytokines= 500 +-10
+            }
+```
+In the above example, the expected value of the cytokines after successful experiment
+execution is 500 with a standard deviation of 10.
 # Execution:
 Run the ServerLauncher.java in the package org.xtext.example.mydsl.web.
 
