@@ -207,8 +207,17 @@ experiment specification defined using the DSL and the generated artifacts were 
 run the ISHC simulation model in MASON to get the results.
 
 # Execution:
-Run the ServerLauncher.java in the package org.xtext.example.mydsl.web.
+- In order to test the new grammar and generator invoke **Run As|Eclipse Application**
+from the context menu of the project. The Eclipse IDE will
+launch a new runtime Eclipse IDE.
+- Once its launched create a new **General | Project** in the Project Explorer. Within
+that project create a file, e.g. Test001.mysl. You need to add the file extension **.mydsl**
+otherwise your DSL editor wont open it automatically. You can enter the reference model
+and save the file changes.
+- Xtext parses automatically all testdsl files within that project. On saving that file
+Xtext will trigger the generator. Youll notice a new folder appearing in your project:
+**src-gen**. Thats where the generator puts its generated artifacts.
 
-This will launch the server and you can look at the web interface at localhost
+-To run the web editor, run the ServerLauncher.java in the web folder.This will launch the server and you can look at the web editor at localhost.
 
-For details please look into : https://github.com/szc0098/Simulation-Experiment-Management/blob/master/SImulation%20Experiment%20Management.pdf
+For details please look into : [Simulation Experiment Management](https://github.com/szc0098/Simulation-Experiment-Management/blob/master/SImulation%20Experiment%20Management.pdf)
