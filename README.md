@@ -23,6 +23,7 @@ MASON
 
 PRISM Model Checker http://www.prismmodelchecker.org/manual/InstallingPRISM/Instructions#source
 
+{% highlight java %} design FULL_FACT_DESIGN { method FULLFACTORIAL; varlist X,Y,Z; } {% endhighlight %}
 
 # Execution:
 Run the ServerLauncher.java in the package org.xtext.example.mydsl.web.
