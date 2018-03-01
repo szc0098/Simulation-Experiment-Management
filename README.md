@@ -182,6 +182,30 @@ performance measure is
 ```
 In the above example, the expected value of the cytokines after successful experiment
 execution is 500 with a standard deviation of 10.
+
+# Code Generation
+
+We used the Xtend code generation process for mapping the DSL to platform. A set of
+templates were derived from the reference implementation and used for the transformation
+step. 
+```ruby
+class MyDslGenerator extends AbstractGenerator {
+
+	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+		fsa.generateFile('ishc.properties', toISHCProperties(resource.allContents
+				.filter(typeof(ModelSection)).head))
+		fsa.generateFile('delivery.properties', toDeliveryProperties(resource.allContents
+				.filter(typeof(ModelSection)).head , resource.allContents.filter(typeof(Experiment)).head))
+		fsa.generateFile("KupfferCell.java", toKupfferCell(resource.allContents
+				.filter(typeof(ModelSection)).head))
+		fsa.generateFile("Hepatocyte.java", toHepatocyte(resource.allContents
+				.filter(typeof(ModelSection)).head))
+	}
+```
+The experiment specifictaion is used for code generation by the template engine. The
+experiment specification defined using the DSL and the generated artifacts were used to
+run the ISHC simulation model in MASON to get the results.
+
 # Execution:
 Run the ServerLauncher.java in the package org.xtext.example.mydsl.web.
 
