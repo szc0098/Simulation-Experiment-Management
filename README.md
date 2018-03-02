@@ -277,4 +277,4 @@ maximize in- formation gain. This agent would be able to perform optimizations
 between the experiment and hypothesis space in order to predict the most valuable parametrization of experiments and hypotheses that would lead to faster discovery.
 
 
-For more details, please look into : [Simulation Experiment Management](https://github.com/szc0098/Simulation-Experiment-Management/blob/master/SImulation%20Experiment%20Management.pdf)
+For more details, please look into : [Simulation Experiment Management](https://github.com/szc0098/Simulation-Experiment-Management/blob/master/Simulation%20Experiment%20Management.pdf)
