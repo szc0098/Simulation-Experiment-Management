@@ -1,1 +1,0 @@
-ltl u1 { []((seen < N) || (tour > MAX)) }

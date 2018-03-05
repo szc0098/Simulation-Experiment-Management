@@ -1,0 +1,120 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="en-us">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Experiment Management System</title>
+	<link rel="stylesheet" type="text/css" href="xtext/2.12.0/xtext-ace.css"/>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="webjars/requirejs/2.3.2/require.min.js"></script>
+	<script type="text/javascript">
+		var baseUrl = window.location.pathname;
+		var fileIndex = baseUrl.indexOf("index.html");
+		if (fileIndex > 0)
+			baseUrl = baseUrl.slice(0, fileIndex);
+		require.config({
+			baseUrl: baseUrl,
+			paths: {
+				"jquery": "webjars/jquery/2.2.4/jquery.min",
+				"ace/ext/language_tools": "webjars/ace/1.2.3/src/ext-language_tools",
+				"xtext/xtext-ace": "xtext/2.12.0/xtext-ace"
+			}
+		});
+		require(["webjars/ace/1.2.3/src/ace"], function() {
+			require(["xtext/xtext-ace"], function(xtext) {
+				xtext.createEditor({
+					baseUrl: baseUrl,
+					syntaxDefinition: "xtext-resources/generated/mode-mydsl"
+				});
+					jQuery('#generate-button').bind("click", function(e){
+					alert("Done!");
+					jQuery('#generator-result').html('<iframe src="http://' + location.host + '/xtext-service/generate?resource=example1.mydsl"></iframe>');
+					e.preventDefault();
+				});
+			});
+		});
+	</script>
+	
+	
+	<script>
+	function myFunction(){
+		document.getElementById("myDropdown").classList.toggle("show");
+	}
+	
+	window.onclick = function(event){
+		if(!event.target.matches('.dropbtn')){
+			var dropdowns = getElementsByClassName("dropdown-content");
+			var i;
+			for(i = 0; i<dropdowns.length;i++){
+				var openDropdown = dropdowns[i];
+				if(openDropdown.classList.contains('show')){
+					openDropdown.classList.remove('show');
+				}
+			}
+		}
+	}
+	</script>
+	
+	<script>
+		function showNetwork(){
+			
+			document.getElementById('coherence').style.maxHeight ="300px";
+			document.getElementById('coherence').style.maxWidth ="400px";
+			var images = document.querySelectorAll("#coherence img");
+			for(var i= 0; i<images.length; i++)
+				{
+				images[i].src = images[i].getAttribute('data-src');
+				}
+		}
+	</script>
+	
+</head>
+<body>
+
+<div class="container">	
+		<div class="header">
+				<h1>Experiment Management System</h1>
+		</div>
+
+
+		<div class="navbar">
+		  		
+  		<div class="dropdown">
+    		<button id="generate-button" class ="dropbtn" value="Generate" title="Generate">Generate</button>
+  		</div>
+  		
+
+  		
+  		  		
+  		<div class="dropdown">
+    		<button  class ="dropbtn" value="Visualize" title="Coherence Network" onclick = "showNetwork()">Coherence Network</button>
+    		<object data= "Graph.class"></object>
+  		</div>
+  		
+  		
+  		
+  		</div>
+
+	<div class="content">
+		<div id="xtext-editor" data-editor-xtext-lang="mydsl" data-editor-resource-id="example1.mydsl"></div>
+	</div>
+
+	
+	<div class="coherence" id="coherence">
+		<h3>Coherence Network</h3>
+
+		<img data-src="\xtext-resources\CN1.png" >
+
+	</div>
+
+	<div class="markov">
+		<h3>Markov Model</h3>
+		<p>The Markov Model is shown here</p>
+
+	</div>
+</div>
+
+</body>
+</html>
