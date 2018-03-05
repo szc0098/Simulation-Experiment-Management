@@ -5,7 +5,7 @@ MDE-enhanced Eclipse tool chain to identify, prioritize, formulate questions, an
  A Domain-Specific Experiment Management Languageis developed towards defining families of simulation experiments, in accordance with theDOE methodology.A web editor to document the experiment specification is available to the user. 
 This framework also provides support for model verification by processing input from a domain specific language for domain specific simulation experiments. It takes a set of evidences and hypotheses from the DSL and creates an observer of the simulation to record data related to these evidence/hypotheses. It converts the simulation data to a discrete time markov chain which is validated using a probabilistic model checker.
 
-The results of the  model checking are incorporated into Bayesian networks which is used to illustrate the probability of events in the simulation model. These can be incorporated for active learning and automation in the system for selecting better experiments at a faster rate to increase knowledge gain. A decision tree that analyzes the experiment data, is used to identify factors that better charaterize the model behavior.
+
 
 
 # Motivation
